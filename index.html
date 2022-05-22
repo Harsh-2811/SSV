@@ -1429,6 +1429,14 @@
         "https://smtpjs.com/v3/smtp.js">
       </script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("user_00FBXQES8XbhV1THedLJF");
+   })();
+</script>
       <script type="text/javascript">
 //         document.addEventListener("contextmenu", function(e){
 //   e.preventDefault();
@@ -1448,25 +1456,18 @@
           var contactNo = $("#phone").val()
           var message = $("#message").val()
             console.log(name)
-
-          var mailBody = `
-            Name : ${name} </br>
-            Email : ${email} </br>
-            Contact No : ${contactNo} </br>
-
-            Message : ${message}
-          `
-        Email.send({
-            Host: "smtp.gmail.com",
-            Username: "harshpatel281199@gmail.com",
-            Password: "dhipntjyhqlbipbf",
-            To: 'hrpatel8935@gmail.com',
-            From: "harshpatel281199@gmail.com",
-            Subject: "Email From SSV Contact Zone",
-            Body: mailBody,
-          })
-            .then(function (message) {
-                swal("Sent!", "Your Mail Sent Successfully !", "success");
+            templateParams ={
+                "to_name":"SSV",
+                "from_name":name,
+                "message":message,
+                "contact_no":contactNo,
+                "subject":"New Inquiry from SSV Website"
+            }
+            emailjs.send("service_rebjq8g","template_bu2qqcq", templateParams)
+            .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+            console.log('FAILED...', error);
             });
        })
       </script>

@@ -1476,6 +1476,10 @@
                      text: `Hey ${name} Your mail has been sent to Admin! We will contact you soon Thank you`,
                     icon: "success",
                 })
+                $("#name").val("")
+                $("#email").val("")
+                $("#phone").val("")
+                $("#message").val("")
             console.log('SUCCESS!', response.status, response.text);
             }, function(error) {
             console.log('FAILED...', error);

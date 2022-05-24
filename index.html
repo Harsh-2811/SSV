@@ -1083,7 +1083,8 @@
                                             </div>
                                             <div class="btn-part">                                            
                                                 <div class="form-group mb-0">
-                                                    <input class="readon2 submit-btn con-btn" id="sendMail" type="button" value="Submit Now">
+                                                    <button type="submit" class="readon2 submit-btn con-btn" id="sendMail" type="button" style="    display: flex;
+                                                    align-items: center;"><i class="fa fa-spinner fa-spin mr-2 d-none "></i> Submit Now</button>
                                                 </div>
                                             </div>  
                                         </fieldset>
@@ -1451,6 +1452,9 @@
 //   }
 // });
        $(document).on('click','#sendMail',function(){
+           $(this).children("i").addClass('d-block')
+           $(this).children("i").removeClass('d-none')
+
         var name = $("#name").val()
           var email = $("#email").val()
           var contactNo = $("#phone").val()
@@ -1465,6 +1469,13 @@
             }
             emailjs.send("service_rebjq8g","template_bu2qqcq", templateParams)
             .then(function(response) {
+                $("#sendMail").children("i").removeClass('d-block')
+                $("#sendMail").children("i").addClass('d-none')
+                swal({
+                    title: "Inquiry Sent Successfully!",
+                     text: `Hey ${name} Your mail has been sent to Admin! We will contact you soon Thank you`,
+                    icon: "success",
+                })
             console.log('SUCCESS!', response.status, response.text);
             }, function(error) {
             console.log('FAILED...', error);
